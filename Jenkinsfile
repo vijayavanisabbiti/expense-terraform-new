@@ -23,12 +23,12 @@ pipeline {
                 }
             }
 
-            stage('PROD Env') {
+/*            stage('PROD Env') {
                 steps {
                     sh 'terraform init -backend-config=prod-env/state.tfvars'
                     sh 'terraform ${ACTION} -auto-approve -var-file=prod-env/main.tfvars'
                 }
-            }
+            }*/
         }
     }
 
