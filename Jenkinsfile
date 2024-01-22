@@ -16,19 +16,17 @@ pipeline {
     stages {
 
         stage('TF Action') {
-            parallel {
-                stage('DEV') {
-                    steps {
-                        sh 'terraform init -backend-config=dev-env/state.tfvars'
-                        sh 'terraform ${ACTION} -auto-approve -var-file=dev-env/main.tfvars'
-                    }
+            stage('DEV') {
+                steps {
+                    sh 'terraform init -backend-config=dev-env/state.tfvars'
+                    sh 'terraform ${ACTION} -auto-approve -var-file=dev-env/main.tfvars'
                 }
+            }
 
-                stage('PROD') {
-                    steps {
-                        sh 'terraform init -backend-config=prod-env/state.tfvars'
-                        sh 'terraform ${ACTION} -auto-approve -var-file=prod-env/main.tfvars'
-                    }
+            stage('PROD') {
+                steps {
+                    sh 'terraform init -backend-config=prod-env/state.tfvars'
+                    sh 'terraform ${ACTION} -auto-approve -var-file=prod-env/main.tfvars'
                 }
             }
         }
